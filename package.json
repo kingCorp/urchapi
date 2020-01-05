@@ -1,0 +1,28 @@
+{
+  "name": "urchapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "iamtobay",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.3",
+    "morgan": "^1.9.1",
+    "node-mailer": "^0.1.1",
+    "nodemon": "^2.0.1"
+  },
+  "devDependencies": {
+    "bcrypt": "^3.0.7",
+    "cross-env": "^6.0.3",
+    "dotenv": "^8.2.0",
+    "jsonwebtoken": "^8.5.1"
+  }
+}
