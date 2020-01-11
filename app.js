@@ -8,6 +8,7 @@ const app = express();
 //import routes
 const products = require('./urch/routes/product')
 const users = require('./urch/routes/user')
+const orders = require('./urch/routes/order')
 
 //db connect
 require('./urch/middleware/db');
@@ -38,6 +39,7 @@ app.use((req, res, next) => {
 //middleware routes handling requests
 app.use('/api/v1/products', products);
 app.use('/api/v1/users', users);
+app.use('/api/v1/orders', orders);
 
 
 //handling errors

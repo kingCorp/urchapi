@@ -42,3 +42,5 @@ exports.fetch_all = (req, res, next) => {
   })
 
 }
+
+

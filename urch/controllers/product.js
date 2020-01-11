@@ -50,8 +50,9 @@ exports.fetch_all = (req, res, next) => {
     result => {
       console.log(result);
       res.status(200).json({
+        code: "201",
         message: "All products",
-        details: result,
+        data: result,
       })
     }).catch(err => {
     console.log(err)
@@ -59,15 +60,64 @@ exports.fetch_all = (req, res, next) => {
       error: err
     });
   })
+}
 
-  // Product.find().populate('categories').exec().then(doc => {
-  //   console.log(doc);
-  //   res.status(200).json({doc});
-  // }).catch(err => {
-  //   console.log(err)
-  //   res.status(500).json({
-  //     error: err
-  //   });
-  // })
+//product info
+exports.product_details = (req, res, next) => {
+  const id = req.params.id
+  console.log(req.userData);
+  Product.findById(id).populate('categories')
+    .exec()
+    .then(doc => {
+      if(doc == null){
+        res.status(409).json({ message: 'product doesnt exist',})
+      }
+      res.status(200).json({
+        message: 'product',
+        data: doc
+      });
+    })
+    .catch(err => {
+      res.status(409).json(err)
+    })
+}
 
+//get products in a category
+exports.fetch_by_category = (req, res, next) => {
+  Product.find({categories:req.params.id}).populate('categories').exec().then(doc => {
+    console.log(doc);
+    res.status(200).json({
+      code: "201",
+      message: "products by categories",
+      data:doc
+    });
+  }).catch(err => {
+    console.log(err)
+    res.status(500).json({
+      message: 'category doesnt exist',
+      error: err
+    });
+  })
+}
+
+
+//delete user
+exports.product_delete = (req, res, next) => {
+  const id = req.params.id;
+  Product.remove({
+      _id: id
+    })
+    .exec()
+    .then(result => {
+      res.status(200).json({
+        messgae: 'Product deleted',
+        data: result
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({
+        error: err
+      });
+    });
 }
